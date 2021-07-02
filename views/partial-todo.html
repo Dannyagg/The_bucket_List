@@ -1,0 +1,26 @@
+<main>
+    <h1 class="text-center">${name}'s Todo List</h1>
+    ${taskList.map(task => `
+        <p>${task.task_content} ----- ${(task.is_complete)? 'Done' : 'Incomplete'}</p>
+        <form action="todos/update" method="POST">
+            <input type="hidden" name="task_id" value="${task.id}">
+            <input type="hidden" name="is_complete" value=${task.is_complete}>
+            <button class="btn btn-primary" type="submit">${(task.is_complete)? 'Mark as Incomplete' : 'Mark as Complete'}</button>
+        </form>
+        <hr>
+        
+        `).join('')} 
+    
+    <div class="text-center">
+        <form action="/todos/add" method="POST">
+            <p>Add a new task:</p>
+            <input type="hidden" value='${user_id}' name="user_id"/>
+    
+                <div class="form-label">
+                    <textarea class="textarea is-primary" placeholder="Write your task here" rows="4" cols="50" name="task_content" required></textarea>
+                </div>
+          
+            <button class="btn btn-primary" type="submit">Add Task</button>
+        </form>
+    </div>
+</main>
